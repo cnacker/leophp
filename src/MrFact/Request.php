@@ -14,8 +14,11 @@ class Request
 	
 	public function init($config = [])
 	{
+		$requestUri = $_SERVER['REQUEST_URI'];
+		$requestPath = parse_url($requestUri, PHP_URL_PATH);
+		
 		$this->method = $_SERVER['REQUEST_METHOD'];
-		$this->uri = $_SERVER['REQUEST_URI'];
+		$this->uri = $requestPath;
 	}
 	
 	public function getMethod()

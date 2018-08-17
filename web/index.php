@@ -22,7 +22,7 @@ $Kernel->shutdown();
 
 
 Mr::php();
-# print_r($GLOBALS);
+# print_r($GLOBALS); 
 
 
 

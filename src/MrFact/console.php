@@ -59,8 +59,10 @@ class Mr
 	{
 		global $_DEBUG;
 		# print_r(__METHOD__);
-		\Composer\Autoload\includeFile(APP_PATH . '/../app/config.php');
-		\Mr\Kernel::on();
+		$GLOBALS['_CONFIG'] = \Composer\Autoload\includeFile(APP_PATH . '/../app/config.php');
+		$kernel = new \Mr\Kernel;
+		$kernel->on();
+		# \Mr\Kernel::on();
 		if ($off) {
 			\Mr\Kernel::off();
 		}

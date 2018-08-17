@@ -11,9 +11,9 @@ class Kernel extends Core
 	{
 	}
 	
-	public static function on($config = [])
+	public function on($config = [])
 	{
-		$GLOBALS['Mr'] = $Mr = self::getInstance('\Mr\Kernel');
+		$GLOBALS['Mr'] = $Mr = $this->getInstance('\Mr\Kernel');
 		$Request = $Mr->request();
 		# echo $Request->getPath();
 		
@@ -21,11 +21,11 @@ class Kernel extends Core
 		# $route->add('\_default\_default', '/mr-fact/web/index.php/{m:}/{c:[a-z]+}/{a:\d+}?d={_module:[a-z]+}&f={_action:}', 'GET');
 		# $route->add('\{module}\{controller}@{action}', ['a' => '', 'c' => '', 'm' => ''], 'GET');
 		# $route->add('_custom/_func', [['s' => 'custom/func']], 'GET');
-		# $route->add('\{module}\{controller}@{action}', '/mr-fact/web/index.php/{_module:}/{_controller:}/{_action:}', 'GET');
-		$route->add('\{_module}\{c}\{a}@{a}', '/mr-fact/web/index.php/{_module:}/{c:}/a/{a}', 'GET');# 
+		$route->add('\{module}\{controller}@{action}', '/{module:}/{controller:}/{action:}', 'POST'); # /mr-fact/web/index.php
+		# $route->add('\{_module}\{c}\{a}@{a}', '/mr-fact/web/index.php/{_module:}/{c:}/a/{a}', 'GET');
 		$route->parse();# 
 		$route = $route->on($Request);# 
-		# print_r($route);exit;
+		# print_r($route);exit; 
 		
 		$module = $m = self::$moduleDefault;
 		$controller = $c = self::$controllerDefault;
@@ -61,6 +61,8 @@ class Kernel extends Core
 				break;
 			}
 		}
+		
+		# print_r(get_defined_vars());exit; 
 		
 		$object = new $class();
 		

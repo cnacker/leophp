@@ -5,12 +5,13 @@ class Core
 {
 	public static $instance = [];
 	public $inst = [];
+	public $config = [];
 	
 	public function __construct()
 	{
 	}
 	
-	public static function getInstance($name = 'Core', $class = null)
+	public static function getInst($name = 'Core', $class = null)
 	{
 		if (isset(self::$instance[$name]) && null != self::$instance[$name]) {
 			return self::$instance[$name];
@@ -19,7 +20,7 @@ class Core
 		return self::$instance[$name] = new $class();
 	}
 	
-	public function getInst($name = 'Core', $class = null)
+	public function getInstance($name = 'Core', $class = null)
 	{
 		if (isset($this->inst[$name]) && null != $this->inst[$name]) {
 			return $this->inst[$name];
@@ -30,17 +31,17 @@ class Core
 	
 	public function router()
 	{
-		return self::getInstance('\Mr\Router');
+		return $this->getInstance('\Mr\Router');
 	}
 	
 	public function request()
 	{
-		return self::getInstance('\Mr\Request');
+		return $this->getInstance('\Mr\Request');
 	}
 	
 	public function template()
 	{
-		return self::getInstance('\Mr\Template');
+		return $this->getInstance('\Mr\Template');
 	}
 	
 	public function __destruct()
