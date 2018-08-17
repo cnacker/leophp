@@ -30,6 +30,17 @@ class _class extends _abstract implements \Mr\Interfaces\Action
 		header('Content-Type: application/json; charset=utf-8');
 		# print_r($GLOBALS);
 		
+		$hooks = [
+			'git-oschina-hook' => 'Gitee',
+			'GitHub-Hookshot' => 'GitHub',
+		];
+		$class = '';
+		if (preg_match('/^([a-z\-]+)\/(.*)/i', $_SERVER['HTTP_USER_AGENT'], $matches)) {
+			$key = $matches[1];
+			$class = isset($hooks[$key]) ? $hooks[$key] : '';
+		}
+		
+		
 		$php_input = file_get_contents('php://input');
 		
 		// 写入日志
@@ -37,7 +48,20 @@ class _class extends _abstract implements \Mr\Interfaces\Action
 		$put = file_put_contents($path . time() . '.txt', print_r($GLOBALS, true));
 		$log = file_put_contents($path . date('nj') . '.log', $php_input . PHP_EOL, FILE_APPEND);
 		
-		# unset($secret, $php_input, $payload, $json);
+		
+		if (!$class) {
+			$this->_json(1, 'test', $_SERVER);
+			exit;
+		}
+		
+		$class = '\app\_module\classes\service\\' . $class;
+		$obj = new $class;
+		$result = $obj->result;
+		if (0 !== $obj->cmp) {
+			http_response_code(404);
+		}
+		
+		unset($php_input);
 		$this->_json(0, 'test', get_defined_vars());
 	}
 }
