@@ -37,12 +37,13 @@ class _class extends _abstract implements \Mr\Interfaces\Action
 			'GitHub-Hookshot' => 'GitHub',
 		];
 		$class = '';
-		if (preg_match('/^([a-z\-]+)\/(.*)/i', $_SERVER['HTTP_USER_AGENT'], $matches)) {
+		# $_SERVER['HTTP_USER_AGENT'] = 'git-oschina-hook';
+		if (preg_match('/^([a-z\-]+)(.*)/i', $_SERVER['HTTP_USER_AGENT'], $matches)) {
 			$key = $matches[1];
 			$class = isset($hooks[$key]) ? $hooks[$key] : '';
 		}
-		
-		
+		# print_r([$key, $class]);
+		# exit;
 		$php_input = file_get_contents('php://input');
 		
 		// 写入日志
@@ -52,18 +53,18 @@ class _class extends _abstract implements \Mr\Interfaces\Action
 		
 		
 		if (!$class) {
-			$this->_json(1, 'test', $_SERVER);
+			$this->_json(1, 'test', $_SERVER['HTTP_USER_AGENT']);
 			exit;
 		}
 		
 		$class = '\app\_module\classes\service\\' . $class;
 		$obj = new $class;
-		$result = $obj->result;
+		# $result = $obj->result;
 		if (0 !== $obj->cmp) {
 			http_response_code(404);
 		}
 		
-		unset($php_input);
+		unset($hooks, $class, $matches, $php_input);
 		$this->_json(0, 'test', get_defined_vars());
 	}
 }

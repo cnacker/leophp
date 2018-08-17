@@ -11,6 +11,7 @@ class WebHooks
 	public function __construct()
 	{
 		$this->php_input = file_get_contents('php://input');
+		# $this->php_input = '{"repository": {"full_name": "wudi/cdn"} }';
 		$this->_init();
 	}
 	
