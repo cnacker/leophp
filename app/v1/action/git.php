@@ -37,8 +37,8 @@ class _class extends _abstract implements \Mr\Interfaces\Action
 			'GitHub-Hookshot' => 'GitHub',
 		];
 		$class = '';
-		# $_SERVER['HTTP_USER_AGENT'] = 'git-oschina-hook';
-		if (preg_match('/^([a-z\-]+)(.*)/i', $_SERVER['HTTP_USER_AGENT'], $matches)) {
+		$http_user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+		if (preg_match('/^([a-z\-]+)(.*)/i', $http_user_agent, $matches)) {
 			$key = $matches[1];
 			$class = isset($hooks[$key]) ? $hooks[$key] : '';
 		}
@@ -53,7 +53,7 @@ class _class extends _abstract implements \Mr\Interfaces\Action
 		
 		
 		if (!$class) {
-			$this->_json(1, 'test', $_SERVER['HTTP_USER_AGENT']);
+			$this->_json(1, 'test', $http_user_agent);
 			exit;
 		}
 		
