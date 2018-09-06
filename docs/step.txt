@@ -1,0 +1,25 @@
+1.资源库
+https://gitee.com/projects/new
+git@gitee.com:netjoin/mr-fact.git
+
+2.安装
+composer.json
+composer install
+
+3.入口文件和核心类
+web/index.php
+src/MrFact/console.php
+
+4.动作方法
+app\_default\action\_default.php
+
+5.布局视图
+app\_default\theme\_default\_default._default.php
+
+file
+action
+class
+template
+orm
+render
+yes
