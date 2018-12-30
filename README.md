@@ -1,4 +1,16 @@
-# Mr.Fact
+# ♌ Leophp 2018.7.25
+
+包 wuding/leophp
+
+源码库 https://gitee.com/netjoin/mr-fact
+
+相比较上一时期，路由和模板引擎都是框架集成的
+
+充分使用 Traits 等特性
+
+增加服务类，用于精简控制器
+
+
 
 #### 项目介绍
 Mr.Fact PHP Framework
