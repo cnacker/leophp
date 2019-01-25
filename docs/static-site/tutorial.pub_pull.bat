@@ -5,6 +5,6 @@ echo #  >>%filename%
 echo %date%%time% >>%filename%
 "C:\Program Files\Git\cmd\git.exe" pull origin master >>%filename% 2>&1
 echo ##  >>%filename%
-REM git push gitee master >>%filename% 2>&1
+git push gitee master >>%filename% 2>&1
 echo ###  >>%filename%
 exit
