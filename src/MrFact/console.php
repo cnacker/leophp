@@ -59,7 +59,8 @@ class Mr
 	{
 		global $_DEBUG;
 		# print_r(__METHOD__);
-		$GLOBALS['_CONFIG'] = \Composer\Autoload\includeFile(APP_PATH . '/../app/config.php');
+		# $GLOBALS['_CONFIG'] = \Composer\Autoload\includeFile(APP_PATH . '/../app/config.php');
+		$GLOBALS['_CONFIG'] = include APP_PATH . '/config.php';
 		$kernel = new \Mr\Kernel;
 		$kernel->on();
 		# \Mr\Kernel::on();
