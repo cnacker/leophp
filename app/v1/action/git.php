@@ -4,6 +4,7 @@ namespace app\v1\action;
 use Mr\Abstracts\Action as _abstract;
 use app\v1\classes\model\com_urlnk\alimama_auction_code;
 
+// 因为 class_exists 先加载了 git 这个文件，再次检测 _class 类，所以类名不正确照样运行
 class _class extends _abstract implements \Mr\Interfaces\Action
 {
 	protected $var3 = "MyClass_var";
