@@ -20,10 +20,27 @@ Mr.Fact PHP Framework
 与众不同的 PHP 框架，包含 Gitee、GitHub Webhooks 的应用实例
 
 #### 软件架构
-软件架构说明
 
+app/[模块名]/action/[控制器名].php
+
+控制器类检测顺序：
+```
+app/[模块]/action/[HTTP方法]_[控制器]
+app/[模块]/action/[控制器]
+app/[模块]/action/_class
+app/_module/action/_class
+```
+
+动作方法检测顺序：
+```
+[动作]_[HTTP方法]()
+[动作]()
+_action()
+_notfound()
+```
 
 #### 安装教程
+php >= 5.4.0
 
 1. xxxx
 2. xxxx
