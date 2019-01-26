@@ -20,10 +20,14 @@ class WebHooks
 	 */
 	public function git_pull($full_name)
 	{
-		$filename = realpath(APP_PATH . "/../docs/{$full_name}_pull.bat");
+		// 适应 Windows 中文
+		$full_name = mb_convert_encoding($full_name, 'GBK', 'UTF-8');
+		$filename = APP_PATH . "/../docs/{$full_name}_pull.bat";
+		$realpath = realpath($filename);
+		# echo $realpath = mb_convert_encoding($realpath, 'UTF-8', 'GBK');exit;
 		# $command = file_get_contents($filename);
 		$command = <<<HEREDOC
-start $filename
+start $realpath
 HEREDOC;
 		$last_line = exec($command, $output, $return_var);
 		return get_defined_vars();

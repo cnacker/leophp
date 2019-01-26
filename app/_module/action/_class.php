@@ -13,7 +13,10 @@ class _class extends _abstract implements \Mr\Interfaces\Action
     function _func()
     {
 		global $Mr;
-		$name = $Mr->request()::get('name', 'value');
+		$request = $Mr->request();
+		$name = $request::get('name', 'value');
+		// 5.4 无法运行以下代码
+		# $name = $Mr->request()::get('name', 'value');
 		# $arr = Model::all();
 		echo $html = $Mr->template()->render('_skin/_default._default', ['title' => $name]);# 
         # echo "c".PHP_EOL;
