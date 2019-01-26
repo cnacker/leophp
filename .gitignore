@@ -6,3 +6,6 @@ composer.phar
 # composer.lock
 
 # /logs/
+
+# 用户配置
+/app/config.php
