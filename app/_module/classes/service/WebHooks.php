@@ -4,7 +4,7 @@ namespace app\_module\classes\service;
 class WebHooks
 {
 	protected $php_input = null;
-	protected $secret = 'bunny';
+	protected $secret = null;
 	public $cmp = true;
 	public $result = null;
 	
@@ -12,6 +12,7 @@ class WebHooks
 	{
 		$this->php_input = file_get_contents('php://input');
 		# $this->php_input = '{"repository": {"full_name": "wudi/cdn"} }';
+		$this->secret = $GLOBALS['_CONFIG']['git']['webhook_secret'];
 		$this->_init();
 	}
 	
