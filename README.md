@@ -4,6 +4,8 @@
 
 源码库 https://gitee.com/netjoin/mr-fact
 
+镜像 https://github.com/cnacker/leophp
+
 相比较上一时期，路由和模板引擎都是框架集成的
 
 充分使用 Traits 等特性
@@ -14,6 +16,8 @@
 
 #### 项目介绍
 Mr.Fact PHP Framework
+
+与众不同的 PHP 框架，包含 Gitee、GitHub Webhooks 的应用实例
 
 #### 软件架构
 软件架构说明
