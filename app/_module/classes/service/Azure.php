@@ -10,7 +10,13 @@ class Azure extends WebHooks
 		$payload =  $this->php_input ? : (isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : '');
 		$json = json_decode($payload);
 		$full_name = $json->resource->repository->name;
+		$remoteUrl = $json->resource->repository->remoteUrl;
 		$git_event = $json->eventType;
+
+		if (preg_match('/^https:\/\/([a-z0-9\-]+)\.visualstudio\.com\/(.*)/i', $remoteUrl, $matches)) {
+			$user = $matches[1];
+			$full_name = $user .'/'. $full_name;
+		}
 		
 		// 比较签名、切换事件	
 		$this->cmp = strcmp($signature, $this->secret);
