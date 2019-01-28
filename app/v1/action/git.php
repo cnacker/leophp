@@ -36,6 +36,7 @@ class _class extends _abstract implements \Mr\Interfaces\Action
 		$hooks = [
 			'git-oschina-hook' => 'Gitee',
 			'GitHub-Hookshot' => 'GitHub',
+			'VSTS' => 'Azure',
 		];
 		$class = '';
 		$http_user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
