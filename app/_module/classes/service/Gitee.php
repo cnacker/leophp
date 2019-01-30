@@ -11,13 +11,20 @@ class Gitee extends WebHooks
 		$payload =  $this->php_input ? : (isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : '');
 		$json = json_decode($payload);
 		$full_name = $json->repository->full_name;
+
+		// 分支
+		$branch = '';
+		if (isset($json->ref)) {
+			$ref = explode('/', $json->ref);
+			$branch = $ref[2];
+		}
 		
 		// 比较签名、切换事件	
 		$this->cmp = strcmp($signature, $this->secret);
 		if (0 === $this->cmp) {		
 			switch ($git_event) {
 				case 'Push Hook':
-					$this->result = $this->git_pull($full_name, '', 'gitee');
+					$this->result = $this->git_pull($full_name, $branch, 'gitee');
 					break;
 				case 'ping':
 					break;
