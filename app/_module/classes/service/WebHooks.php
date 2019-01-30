@@ -22,8 +22,9 @@ class WebHooks
 	 */
 	public function git_pull($full_name, $branch = '', $site = '')
 	{
+		$branch_path = '';
 		if ($branch && 'master' != $branch) {
-			$branch = '_' . $branch;
+			$branch_path = '_' . $branch;
 		}
 
 		// 解决同名
@@ -34,7 +35,7 @@ class WebHooks
 		
 		// 适应 Windows 中文
 		$full_name = mb_convert_encoding($full_name, 'GBK', 'UTF-8');
-		$filename = APP_PATH . "/../docs/{$full_name}{$branch}_pull$suffix.bat";
+		$filename = APP_PATH . "/../docs/{$full_name}{$branch_path}_pull$suffix.bat";
 		$realpath = realpath($filename);
 		# echo $realpath = mb_convert_encoding($realpath, 'UTF-8', 'GBK');exit;
 		# $command = file_get_contents($filename);
