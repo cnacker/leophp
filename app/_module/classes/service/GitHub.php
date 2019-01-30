@@ -13,10 +13,10 @@ class GitHub extends WebHooks
 		$full_name = $json->repository->full_name;
 
 		// 分支
-		$branch = null;
+		$branch = '';
 		if (isset($json->ref)) {
 			$ref = explode('/', $json->ref);
-			$branch = ('master' != $ref[2]) ? '_' . $ref[2] : '';
+			$branch = $ref[2];
 		}
 		
 		
@@ -26,7 +26,7 @@ class GitHub extends WebHooks
 		if (0 === $this->cmp) {		
 			switch ($git_event) {
 				case 'push':
-					$this->result = $this->git_pull($full_name . $branch);
+					$this->result = $this->git_pull($full_name, $branch);
 					break;
 				case 'ping':
 					break;

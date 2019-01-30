@@ -17,7 +17,7 @@ class Gitee extends WebHooks
 		if (0 === $this->cmp) {		
 			switch ($git_event) {
 				case 'Push Hook':
-					$this->result = $this->git_pull($full_name);
+					$this->result = $this->git_pull($full_name, '', 'gitee');
 					break;
 				case 'ping':
 					break;
