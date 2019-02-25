@@ -14,8 +14,9 @@ class GitHub extends WebHooks
 
 		// 分支
 		$branch = '';
-		if (isset($json->base_ref)) {
-			$ref = explode('/', $json->base_ref);
+		$ref = isset($json->base_ref) ? $json->base_ref : $json->ref;
+		if ($ref) {
+			$ref = explode('/', $ref);
 			$branch = $ref[2];
 		}
 		
