@@ -63,7 +63,7 @@ class Kernel extends Core
 		}
 		
 		# print_r(get_defined_vars());exit; 
-		
+		# $class = "\app\\$module\action\\一整个宇宙的繁星";
 		$object = new $class();
 		
 		$act = '_notfound';
