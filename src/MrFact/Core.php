@@ -4,6 +4,7 @@ namespace Mr;
 class Core
 {
 	public static $instance = [];
+	# private static $instance;
 	public $inst = [];
 	public $config = [];
 	
@@ -18,6 +19,11 @@ class Core
 		}
 		$class = $class ? : $name;
 		return self::$instance[$name] = new $class();
+
+		if (is_null(static::$instance)) {
+			static::$instance = new static();
+		}
+		return static::$instance;
 	}
 	
 	public function getInstance($name = 'Core', $class = null)
