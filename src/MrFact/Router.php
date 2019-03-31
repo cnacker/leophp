@@ -109,10 +109,17 @@ class Router
 				$arr[$method][$type][$key][] = $config;
 			}
 		}
+		$arr['reverse'] = 1;
 		$this->set = $arr;
 		return $this;
 	}
 	
+
+	/**
+	 * 导入请求参数，对应请求方法
+	 * @param $request array 请求参数
+	 * @return object        路由器对象
+	 */
 	public function on($request = null)
 	{
 		foreach ($request as $key => $value) {
@@ -120,6 +127,7 @@ class Router
 		}
 		$method = isset($this->req['method']) ? $this->req['method'] : '';
 		$uri = isset($this->req['uri']) ? $this->req['uri'] : '/';
+		$uri = trim(urldecode($uri), '/');
 		$result = [];
 		if ($this->set) {
 			if ($method && isset($this->set[$method])) {
@@ -135,6 +143,9 @@ class Router
 				}
 				if ($list['uri']) {
 					$result[] = $this->uri($list['uri'], null, $uri, $method);
+				}
+				if (isset($list['reverse'])) {
+					# echo $uri;exit;
 				}
 			} else {
 			}
