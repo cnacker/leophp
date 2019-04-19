@@ -22,8 +22,9 @@ $Kernel->shutdown();
 
 
 Mr::php();
-# print_r($GLOBALS); 
-
+func([], ['Variable']);
+# print_r(get_included_files()); 
+# print_r(Func\globals());
 
 
 
