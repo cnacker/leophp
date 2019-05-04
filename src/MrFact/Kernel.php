@@ -40,6 +40,11 @@ class Kernel extends Core
 				}
 			}
 		}
+		if ($Request->uri == '/v1/git/hooks') {
+			$module = 'v1';
+			$controller = 'git';
+			$action = 'hooks';
+		}
 		$explode = explode('\\', $controller);
 		$count = count($explode) - 1;
 		$last = $explode[$count];
