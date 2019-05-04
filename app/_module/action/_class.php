@@ -61,14 +61,7 @@ class _class extends _abstract implements \Mr\Interfaces\Action
         $query = implode(' :', $split);
         $query = $query ? : $uri;
 
-        $config = [
-            'host' => 'localhost',
-            'port' => '3306',
-            'db_name' => 'url',
-            'username' => 'root',
-            'password' => 'root',
-            'driver_options' => [],
-        ];
+        $config = $GLOBALS['_CONFIG']['database'];
         $mysql = new PhpPdoMysql($config);
         $sql = "SELECT * FROM `url`.`search` WHERE `search_shortcut` = '$keyword'";
         $row = $mysql->find($sql);
