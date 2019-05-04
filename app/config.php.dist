@@ -7,4 +7,12 @@ return [
     'git' => [
         'webhook_secret' => '',
     ],
+    'database' => [
+        'host' => 'localhost',
+        'port' => '3306',
+        'db_name' => 'test',
+        'username' => 'root',
+        'password' => 'root',
+        'driver_options' => [],
+    ],
 ];
