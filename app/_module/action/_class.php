@@ -40,6 +40,12 @@ class _class extends _abstract implements \Mr\Interfaces\Action
         global $Mr;
         $request = $Mr->request();
         $name = $request->uri;
+        /**
+        $fastSearch = new FastSearch();
+        $fastSearch->init($request);
+        $fastSearch->parse();
+        exit;
+        */
         $url = new Url($name);
         $uri = Url::rawUrlDecode();
         $uri = trim($uri, '/');
