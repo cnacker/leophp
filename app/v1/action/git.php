@@ -49,7 +49,7 @@ class _class extends _abstract implements \Mr\Interfaces\Action
 		$php_input = file_get_contents('php://input');
 		
 		// 写入日志
-		$path = 'log/';
+		$path = APP_PATH . '/../logs/';
 		$put = file_put_contents($path . time() . '.txt', print_r($GLOBALS, true));
 		$log = file_put_contents($path . date('nj') . '.log', $php_input . PHP_EOL, FILE_APPEND);
 		
