@@ -58,6 +58,8 @@ class _class extends _abstract implements \Mr\Interfaces\Action
         $split = preg_split('/ :/', $search_terms);
         $search_options = array_pop($split);
         $opt = preg_split('/\s+/', $search_options);
+        $option = array();
+
         $query = implode(' :', $split);
         $query = $query ? : $uri;
 
@@ -72,6 +74,25 @@ class _class extends _abstract implements \Mr\Interfaces\Action
         } else {
             $url = $row->search_url;
             $query = preg_replace('/^' . $row->search_shortcut . '/', '', $query);
+            if (preg_match('/^\[|\]$/', $row->search_option)) {
+                $option = json_decode($row->search_option);
+            } else {
+                $option = explode(',', $row->search_option);
+            }
+        }
+
+        $opt_len = count($opt);
+        $len = count($option);
+        if ($len > $opt_len) {
+            foreach ($option as $key => $value) {
+                $val = isset($opt[$key]) ? $opt[$key] : null;
+                $opt[$key] = $val ? : $value;
+            }
+        } else {
+            foreach ($opt as $key => $value) {
+                $val = isset($option[$key]) ? $option[$key] : null;
+                $opt[$key] = $value ? : $val;
+            }
         }
         foreach ($opt as $key => $value) {
             $url = preg_replace("/{%$key}/", $value, $url);
