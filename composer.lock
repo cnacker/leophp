@@ -1,11 +1,97 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93dbf78dd6f0a9e1fe226a55727cbb85",
-    "packages": [],
+    "content-hash": "396a3919fb98a62b5a8820580bca4cee",
+    "packages": [
+        {
+            "name": "wuding/php-ext",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wuding/php-ext.git",
+                "reference": "bd549f3e5e18e18cfb300d0cf3f8e6cf06739a3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wuding/php-ext/zipball/bd549f3e5e18e18cfb300d0cf3f8e6cf06739a3e",
+                "reference": "bd549f3e5e18e18cfb300d0cf3f8e6cf06739a3e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "wuding/php-func": "^1.0.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ext\\": "src/"
+                },
+                "files": [
+                    "src/Ext.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Benny Wu",
+                    "email": "contact@urlnk.com"
+                }
+            ],
+            "description": "PHP Extension Library",
+            "time": "2019-08-15T12:20:29+00:00"
+        },
+        {
+            "name": "wuding/php-func",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wuding/php-func.git",
+                "reference": "b93e9d2f79fcee53030ec2164a9bdf0b3e2ff44b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wuding/php-func/zipball/b93e9d2f79fcee53030ec2164a9bdf0b3e2ff44b",
+                "reference": "b93e9d2f79fcee53030ec2164a9bdf0b3e2ff44b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Func\\X\\": "src/X/",
+                    "Func\\": "src/"
+                },
+                "files": [
+                    "src/Func.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Benny Wu",
+                    "email": "contact@urlnk.com"
+                }
+            ],
+            "description": "PHP function polyfill",
+            "keywords": [
+                "function",
+                "polyfill",
+                "shim"
+            ],
+            "time": "2019-02-25T18:06:55+00:00"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
