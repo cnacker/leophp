@@ -47,29 +47,31 @@ class _class extends _abstract implements \Mr\Interfaces\Action
         exit;
         */
         $url = new Url($name);
-        $uri = Url::rawUrlDecode();
-        $uri = trim($uri, '/');
+        $uri = Url::rawDecode();
+        $uri = ltrim($uri, '/');
+
         $split = preg_split('/\s+/', $uri, 2);
-        $keyword = '';
+        $keyword = $query = '';
         $search_terms = '';
         if (1 < count($split)) {
             list($keyword, $search_terms) = $split;
         }
-        $split = preg_split('/ :/', $search_terms);
-        $search_options = array_pop($split);
-        $opt = preg_split('/\s+/', $search_options);
-        $option = array();
 
-        $query = implode(' :', $split);
+        $opt = $option = array();
+        if (preg_match('/^(.*)\s+:(.*)$/', $search_terms, $matches)) {
+            list($tmp, $query, $search_options) = $matches;
+            $opt = preg_split('/\s+/', $search_options);
+        } else {
+            $query = $search_terms;
+        }
         $query = $query ? : $uri;
 
         $config = $GLOBALS['_CONFIG']['database'];
         $mysql = new PhpPdoMysql($config);
+        $keyword = addslashes($keyword);
         $sql = "SELECT * FROM `url`.`search` WHERE `search_shortcut` = '$keyword'";
         $row = $mysql->find($sql);
         if (!$row) {
-            # print_r($row);
-            # exit;
             $url = "https://www.google.com/search?q=%s";
         } else {
             $url = $row->search_url;
@@ -98,9 +100,8 @@ class _class extends _abstract implements \Mr\Interfaces\Action
             $url = preg_replace("/{%$key}/", $value, $url);
         }
 
-        $query = Url::rawUrlEncode($query);
+        $query = Url::rawEncode($query);
         $url = preg_replace("/%s/", $query, $url);
-        # print_r(get_defined_vars());exit;
         echo $html = $GLOBALS['Mr']->template()->render('_skin/search', ['query' => $query, 'url' => $url]);
     }
 }
