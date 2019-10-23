@@ -127,7 +127,7 @@ class Router
 		}
 		$method = isset($this->req['method']) ? $this->req['method'] : '';
 		$uri = isset($this->req['uri']) ? $this->req['uri'] : '/';
-		$uri = trim(urldecode($uri), '/');
+		$uri = '/' . trim(urldecode($uri), '/');
 		$result = [];
 		if ($this->set) {
 			if ($method && isset($this->set[$method])) {
@@ -161,7 +161,9 @@ class Router
 		if (!$arr) {
 			# print_r($rule);
 			foreach ($rule as $key => $value) {
-				$set[] = $this->uri($value, $key, $uri, $method, 1);
+				foreach ($value as $k => $v) {
+					$set[] = $this->uri($v, $key, $uri, $method, 1);
+				}
 			}
 			return $set;
 		}
