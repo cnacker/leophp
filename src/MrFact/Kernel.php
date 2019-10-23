@@ -18,11 +18,11 @@ class Kernel extends Core
 		# echo $Request->getPath();
 		
 		$route = $Mr->router();
-		# $route->add('\_default\_default', '/mr-fact/web/index.php/{m:}/{c:[a-z]+}/{a:\d+}?d={_module:[a-z]+}&f={_action:}', 'GET');
-		# $route->add('\{module}\{controller}@{action}', ['a' => '', 'c' => '', 'm' => ''], 'GET');
-		# $route->add('_custom/_func', [['s' => 'custom/func']], 'GET');
+		$route->add('\_default\_default', '/mr-fact/web/index.php/{m:}/{c:[a-z]+}/{a:\d+}?d={_module:[a-z]+}&f={_action:}', 'GET');
+		$route->add('\{module}\{controller}@{action}', ['a' => '', 'c' => '', 'm' => ''], 'GET');
+		$route->add('_custom/_func', [['s' => 'custom/func']], 'GET');
 		$route->add('\{module}\{controller}@{action}', '/{module:}/{controller:}/{action:}', 'POST'); # /mr-fact/web/index.php
-		# $route->add('\{_module}\{c}\{a}@{a}', '/mr-fact/web/index.php/{_module:}/{c:}/a/{a}', 'GET');
+		$route->add('\{_module}\{c}\{a}@a', '/mr-fact/web/index.php/{_module:}/{c:}/a/{a}', 'GET');
 		$route->parse();# 
 		$route = $route->on($Request);# 
 		# print_r($route);exit; 
