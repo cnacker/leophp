@@ -298,7 +298,7 @@ class Router
 		$set = [];
 		if (!$arr) {
 			foreach ($rule as $r) {
-				$set[] = $this->query($rule, 1);
+				$set[] = $this->query($r, 1);
 			}
 			return $set;
 		}
