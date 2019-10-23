@@ -276,16 +276,16 @@ class Router
 		
 		$set = [];
 		if (!$arr) {
-			foreach ($rule as $r) {
-				$set[] = $this->super($rule, 1);
+			foreach ($rule as $key => $r) {
+				$set[] = $this->super($r, $key);
 			}
 			return $set;
 		}
-		
+
 		foreach ($rule as $key => $value) {
 			foreach ($value as $k => $v) {
 				if (isset($_GET[$k]) && $v == $_GET[$k]) {
-					$set = $this->info($key);
+					$set = $this->info($arr);
 				}
 			}
 		}
