@@ -4,6 +4,13 @@ return [
         '/index' => '\_default\_default@_default',
         '/index/go' => '_default\_custom\_func@_go',
     ],
+    'routes' => [
+        ['\_default\_default', '/mr-fact/web/index.php/{m:}/{c:[a-z]+}/{a:\d+}?d={_module:[a-z]+}&f={_action:}', 'GET'],
+        ['\{module}\{controller}@{action}', ['a' => '', 'c' => '', 'm' => ''], 'GET'],
+        ['_custom/_func', [['s' => 'custom/func']], 'GET'],
+        ['\{module}\{controller}@{action}', '/{module:}/{controller:}/{action:}', 'POST'],
+        ['\{_module}\{c}\{a}@a', '/mr-fact/web/index.php/{_module:}/{c:}/a/{a}', 'GET'],
+    ],
     'git' => [
         'webhook_secret' => '',
     ],
