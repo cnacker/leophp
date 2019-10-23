@@ -73,9 +73,10 @@ class _class extends _abstract implements \Mr\Interfaces\Action
         $row = $mysql->find($sql);
         if (!$row) {
             $url = "https://www.google.com/search?q=%s";
+            $query = $uri;
         } else {
             $url = $row->search_url;
-            $query = preg_replace('/^' . $row->search_shortcut . '/', '', $query);
+            # $query = preg_replace('/^' . $row->search_shortcut . '/', '', $query);
             if (preg_match('/^\[|\]$/', $row->search_option)) {
                 $option = json_decode($row->search_option);
             } else {
