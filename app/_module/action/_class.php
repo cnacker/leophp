@@ -38,6 +38,8 @@ class _class extends _abstract implements \Mr\Interfaces\Action
     public function _func_get()
     {
         global $Mr;
+
+        // 分析请求路径
         $request = $Mr->request();
         $name = $request->uri;
         /**
@@ -66,6 +68,7 @@ class _class extends _abstract implements \Mr\Interfaces\Action
         }
         $query = $query ? : $uri;
 
+        // 查询关键字
         $config = $GLOBALS['_CONFIG']['database'];
         $mysql = new PhpPdoMysql($config);
         $keyword = addslashes($keyword);
@@ -84,6 +87,7 @@ class _class extends _abstract implements \Mr\Interfaces\Action
             }
         }
 
+        // 替换选项
         $opt_len = count($opt);
         $len = count($option);
         if ($len > $opt_len) {
@@ -101,6 +105,7 @@ class _class extends _abstract implements \Mr\Interfaces\Action
             $url = preg_replace("/{%$key}/", $value, $url);
         }
 
+        // 输出
         $query = Url::rawEncode($query);
         $url = preg_replace("/%s/", $query, $url);
         echo $html = $GLOBALS['Mr']->template()->render('_skin/search', ['query' => $query, 'url' => $url]);

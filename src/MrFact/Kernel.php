@@ -15,8 +15,8 @@ class Kernel extends Core
     {
         $GLOBALS['Mr'] = $Mr = $this->getInstance('\Mr\Kernel');
         $Request = $Mr->request();
-        # echo $Request->getPath();
 
+        // 路由解析
         $route = $Mr->router();
         foreach ($GLOBALS['_CONFIG']['routes'] as $rt) {
             list($handle, $uri, $method) = $rt;
@@ -24,14 +24,13 @@ class Kernel extends Core
         }
         $route->parse();
         $route = $route->on($Request);
-        # print_r($route);exit;
 
+        // 模块分析
         $module = $m = self::$moduleDefault;
         $controller = $c = self::$controllerDefault;
         $action = $a = self::$actionDefault;
         foreach ($route->result as $key => $value) {
             foreach ($value as $k => $v) {
-                # print_r($v);
                 if ($v) {
                     $module = $v[0];
                     $controller = $v[1];
@@ -40,14 +39,6 @@ class Kernel extends Core
             }
         }
 
-        /*
-        if ($Request->uri == '/v1/git/hooks') {
-            $module = 'v1';
-            $controller = 'git';
-            $action = 'hooks';
-        }
-        */
-
         $explode = explode('\\', $controller);
         $count = count($explode) - 1;
         $last = $explode[$count];
@@ -55,6 +46,7 @@ class Kernel extends Core
         $method_controller = implode('\\', $explode);
         $method_action = $action . '_' . strtolower($Request->method);
 
+        // 类检测
         $class = "\app\\$m\action\\$c";
 
         $exsits = [
@@ -69,10 +61,10 @@ class Kernel extends Core
             }
         }
 
-        # print_r(get_defined_vars());exit;
         # $class = "\app\\$module\action\\一整个宇宙的繁星";
         $object = new $class();
 
+        // 执行动作
         $act = '_notfound';
         $exsits = [$method_action, $action, '_action'];
         foreach ($exsits as $key => $value) {
@@ -83,33 +75,12 @@ class Kernel extends Core
         }
 
         $object->$act();
-        /*$Router->on();
-        */
     }
 
     public static function off()
     {
         $var = get_included_files();
         print_r($var); //$GLOBALS
-    }
-
-    public function start($config = [])
-    {
-        # $GLOBALS['Mr'] = $this->getInst();
-        $GLOBALS['Mr'] = $this;
-        # $Kernel = $this->getInst('\Mr\Kernel');
-        $Request = $this->getInst('\Mr\Request');
-        echo $Request->getPath();
-        /*
-        $Router = self::getInstances('Router');
-        $Router->add($Request, 'app\_default\action\_default');
-        $Router->on();
-        */
-    }
-
-    public function shutdown()
-    {
-        print_r($GLOBALS);
     }
 
     public function __destruct()
